@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-data_kansas = "datasetfiles/kc_final.csv"
+data_kansas = "datasetfiles/kansas_housing.csv"
 data_melbourne = "datasetfiles/melbourne_housing.csv"
 data_perth = "datasetfiles/perth_housing.csv"
 
@@ -18,8 +18,6 @@ if set(["waterfront", "view", "grade", "sqft_above", "sqft_living15", "sqft_lot1
 if set(["SellerG", "Unnamed: 0"]).issubset(df_melbourne.columns):
     df_melbourne.drop(["SellerG", "Unnamed: 0"], axis=1, inplace=True)
 
-if set(["NEAREST_STN", "Unnamed: 0"]).issubset(df_melbourne.columns):
-    df_perth.drop(["NEAREST_STN", "Unnamed: 0"], axis=1, inplace=True)
 
 
 # Renomear colunas Kansas
@@ -35,18 +33,17 @@ df_kansas.rename(columns = {'lat':'latitude'}, inplace = True)
 df_kansas.rename(columns = {'long':'longitude'}, inplace = True)
 
 # Renomear colunas Melbourne
-
 df_melbourne.rename(columns = {'Suburb':'suburb'}, inplace = True)
-df_melbourne.rename(columns = {'Adress':'adress'}, inplace = True)
+df_melbourne.rename(columns = {'Address':'address'}, inplace = True)
 df_melbourne.rename(columns = {'Rooms':'rooms'}, inplace = True)
 df_melbourne.rename(columns = {'Type':'type'}, inplace = True)
 df_melbourne.rename(columns = {'Price':'price'}, inplace = True)
 df_melbourne.rename(columns = {'Method':'method_sale'}, inplace = True)
 df_melbourne.rename(columns = {'Date':'date_Sale'}, inplace = True)
-df_melbourne.rename(columns = {'Distance':'distance'}, inplace = True)
+df_melbourne.rename(columns = {'Distance':'cbd_dist'}, inplace = True)
 df_melbourne.rename(columns = {'Postcode':'zipcode'}, inplace = True)
 df_melbourne.rename(columns = {'Bedroom2':'bedrooms'}, inplace = True)
-df_melbourne.rename(columns = {'Bathroom':'bathroom'}, inplace = True)
+df_melbourne.rename(columns = {'Bathroom':'bathrooms'}, inplace = True)
 df_melbourne.rename(columns = {'Car':'car_garage'}, inplace = True)
 df_melbourne.rename(columns = {'Landsize':'sqft_terrain'}, inplace = True)
 df_melbourne.rename(columns = {'BuildingArea':'sqft_contructionarea'}, inplace = True)
@@ -58,10 +55,9 @@ df_melbourne.rename(columns = {'Regionname':'regionname'}, inplace = True)
 df_melbourne.rename(columns = {'Propertycount':'propertycount'}, inplace = True)
 
 # Renomear colunas Perth
-
-df_perth.rename(columns = {'ADDRESS':'adress'}, inplace = True)
-df_perth.rename(columns = {'Suburb':'suburb'}, inplace = True)
-df_perth.rename(columns = {'Price':'price'}, inplace = True)
+df_perth.rename(columns = {'ADDRESS':'address'}, inplace = True)
+df_perth.rename(columns = {'SUBURB':'suburb'}, inplace = True)
+df_perth.rename(columns = {'PRICE':'price'}, inplace = True)
 df_perth.rename(columns = {'BEDROOMS':'bedrooms'}, inplace = True)
 df_perth.rename(columns = {'BATHROOMS':'bathrooms'}, inplace = True)
 df_perth.rename(columns = {'GARAGE':'car_garage'}, inplace = True)
@@ -70,6 +66,7 @@ df_perth.rename(columns = {'FLOOR_AREA':'sqft_living'}, inplace = True)
 df_perth.rename(columns = {'BUILD_YEAR':'year_build'}, inplace = True)
 df_perth.rename(columns = {'CBD_DIST':'cbd_dist'}, inplace = True)
 df_perth.rename(columns = {'BUILD_YEAR':'year_build'}, inplace = True)
+df_perth.rename(columns = {'NEAREST_STN':'nearest_stn'}, inplace = True)
 df_perth.rename(columns = {'NEAREST_STN_DIST':'nearest_stn_dist'}, inplace = True)
 df_perth.rename(columns = {'DATE_SOLD':'date_Sale'}, inplace = True)
 df_perth.rename(columns = {'POSTCODE':'zipcode'}, inplace = True)
