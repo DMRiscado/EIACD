@@ -23,7 +23,7 @@ if set(["SellerG", "Unnamed: 0"]).issubset(df_melbourne.columns):
 
 # Renomear colunas Kansas
 df_kansas.rename(columns = {'id':'id'}, inplace = True)
-df_kansas.rename(columns = {'date':'date_sale'}, inplace = True)
+df_kansas.rename(columns = {'date':'date_sold'}, inplace = True)
 df_kansas.rename(columns = {'price':'price'}, inplace = True)
 df_kansas.rename(columns = {'floors':'floors'}, inplace = True)
 df_kansas.rename(columns = {'condition':'condition'}, inplace = True)
@@ -40,7 +40,7 @@ df_melbourne.rename(columns = {'Rooms':'rooms'}, inplace = True)
 df_melbourne.rename(columns = {'Type':'type'}, inplace = True)
 df_melbourne.rename(columns = {'Price':'price'}, inplace = True)
 df_melbourne.rename(columns = {'Method':'method_sale'}, inplace = True)
-df_melbourne.rename(columns = {'Date':'date_Sale'}, inplace = True)
+df_melbourne.rename(columns = {'Date':'date_sold'}, inplace = True)
 df_melbourne.rename(columns = {'Distance':'cbd_dist'}, inplace = True)
 df_melbourne.rename(columns = {'Postcode':'zipcode'}, inplace = True)
 df_melbourne.rename(columns = {'Bedroom2':'bedrooms'}, inplace = True)
@@ -69,7 +69,7 @@ df_perth.rename(columns = {'CBD_DIST':'cbd_dist'}, inplace = True)
 df_perth.rename(columns = {'BUILD_YEAR':'year_build'}, inplace = True)
 df_perth.rename(columns = {'NEAREST_STN':'nearest_stn'}, inplace = True)
 df_perth.rename(columns = {'NEAREST_STN_DIST':'nearest_stn_dist'}, inplace = True)
-df_perth.rename(columns = {'DATE_SOLD':'date_Sale'}, inplace = True)
+df_perth.rename(columns = {'DATE_SOLD':'date_sold'}, inplace = True)
 df_perth.rename(columns = {'POSTCODE':'zipcode'}, inplace = True)
 df_perth.rename(columns = {'LATITUDE':'latitude'}, inplace = True)
 df_perth.rename(columns = {'LONGITUDE':'longitude'}, inplace = True)
@@ -83,6 +83,15 @@ conversao_kansas = ["price", "bathrooms", "floors"]
 df_kansas[conversao_kansas] = df_kansas[conversao_kansas].astype(int)
 
 
+
+
+
+#Conversão de datas
+df_kansas['date_sold'] = pd.to_datetime(df_kansas['date_sold'])
+df_kansas['date_sold'] = df_kansas['date_sold'].dt.strftime("%d/%m/%Y")
+
+df_perth['date_sold'] = pd.to_datetime(df_perth['date_sold'])
+df_perth['date_sold'] = df_perth['date_sold'].dt.strftime("%m/%Y")
 
 
 
