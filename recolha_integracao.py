@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import numpy as np
 
 data_kansas = "datasetfiles/kansas_housing.csv"
 data_melbourne = "datasetfiles/melbourne_housing.csv"
@@ -77,9 +78,22 @@ df_perth.rename(columns = {'NEAREST_SCH_DIST':'nearest_sch_dist'}, inplace = Tru
 df_perth.rename(columns = {'NEAREST_SCH_RANK':'nearest_sch_rank'}, inplace = True)
 
 
+#Conversão de inteiros
+conversao_kansas = ["price", "bathrooms", "floors"]
+df_kansas[conversao_kansas] = df_kansas[conversao_kansas].astype(int)
+
+
+
+
+
 
 # Sobrescrever os arquivos originais com os DataFrames modificados
 df_kansas.to_csv(data_kansas, index=False)
 df_melbourne.to_csv(data_melbourne, index=False)
 df_perth.to_csv(data_perth, index=False)
 
+
+
+print(df_kansas.dtypes)
+print(df_melbourne.dtypes)
+print(df_perth.dtypes)
