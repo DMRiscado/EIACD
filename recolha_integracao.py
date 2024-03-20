@@ -96,13 +96,19 @@ df_perth['date_sold'] = df_perth['date_sold'].dt.strftime("%m/%Y")
 
 
 
-# Sobrescrever os arquivos originais com os DataFrames modificados
+# Reescrever os arquivos originais com os DataFrames modificados
 df_kansas.to_csv(data_kansas, index=False)
 df_melbourne.to_csv(data_melbourne, index=False)
 df_perth.to_csv(data_perth, index=False)
 
+# print(df_kansas.dtypes)
+# print(df_melbourne.dtypes)
+# print(df_perth.dtypes)
 
+# full join dos 3 dataframes
 
-print(df_kansas.dtypes)
-print(df_melbourne.dtypes)
-print(df_perth.dtypes)
+df_full = pd.concat([df_kansas, df_melbourne, df_perth], ignore_index=True)
+df_full.to_csv("datasetfiles/full_housing.csv", index=False)
+
+#inner join dos 3 dataframes
+
