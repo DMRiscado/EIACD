@@ -2,36 +2,28 @@ import pandas as pd
 import os
 import numpy as np
 
-data_kansas = "datasetfiles/kansas_housing.csv"
+data_delhi = "datasetfiles/delhi_housing.csv"
 data_melbourne = "datasetfiles/melbourne_housing.csv"
 data_perth = "datasetfiles/perth_housing.csv"
 
 # Carregar os DataFrames
 
-df_kansas = pd.read_csv(data_kansas)
+df_delhi = pd.read_csv(data_delhi)
 df_melbourne = pd.read_csv(data_melbourne)
 df_perth = pd.read_csv(data_perth)
 
 # Eliminação de colunas desnecessárias se as colunas existirem no DataFrame
-if set(["waterfront", "view", "grade", "sqft_above", "sqft_living15", "sqft_lot15", "Unnamed: 0"]).issubset(df_kansas.columns):
-    df_kansas.drop(["waterfront", "view", "grade", "sqft_above", "sqft_living15", "sqft_lot15", "Unnamed: 0"], axis=1, inplace=True)
+
 
 if set(["SellerG", "Unnamed: 0"]).issubset(df_melbourne.columns):
     df_melbourne.drop(["SellerG", "Unnamed: 0"], axis=1, inplace=True)
 
+if set(['nearest_sch_rank','nearest_sch_dist','nearest_sch','nearest_stn_dist','nearest_stn', 'cbd_dist'  , "Unnamed: 0"]).issubset(df_perth.columns):
+    df_perth.drop(["nearest_sch_rank", 'nearest_sch_rank', 'nearest_sch', 'nearest_stn_dist', 'nearest_stn', 'cbd_dist', "Unnamed: 0"], axis=1, inplace=True)
 
 
-# Renomear colunas Kansas
-df_kansas.rename(columns = {'id':'id'}, inplace = True)
-df_kansas.rename(columns = {'date':'date_sold'}, inplace = True)
-df_kansas.rename(columns = {'price':'price'}, inplace = True)
-df_kansas.rename(columns = {'floors':'floors'}, inplace = True)
-df_kansas.rename(columns = {'condition':'condition'}, inplace = True)
-df_kansas.rename(columns = {'yr_build':'yr_built'}, inplace = True)
-df_kansas.rename(columns = {'yr_renovated':'year_renovated'}, inplace = True)
-df_kansas.rename(columns = {'zipcode':'zipcode'}, inplace = True)
-df_kansas.rename(columns = {'lat':'latitude'}, inplace = True)
-df_kansas.rename(columns = {'long':'longitude'}, inplace = True)
+# Renomear colunas Delhi
+
 
 # Renomear colunas Melbourne
 df_melbourne.rename(columns = {'Suburb':'suburb'}, inplace = True)
@@ -66,7 +58,6 @@ df_perth.rename(columns = {'LAND_AREA':'sqft_lot'}, inplace = True)
 df_perth.rename(columns = {'FLOOR_AREA':'sqft_living'}, inplace = True)
 df_perth.rename(columns = {'BUILD_YEAR':'yr_built'}, inplace = True)
 df_perth.rename(columns = {'CBD_DIST':'cbd_dist'}, inplace = True)
-df_perth.rename(columns = {'BUILD_YEAR':'year_build'}, inplace = True)
 df_perth.rename(columns = {'NEAREST_STN':'nearest_stn'}, inplace = True)
 df_perth.rename(columns = {'NEAREST_STN_DIST':'nearest_stn_dist'}, inplace = True)
 df_perth.rename(columns = {'DATE_SOLD':'date_sold'}, inplace = True)
@@ -79,16 +70,13 @@ df_perth.rename(columns = {'NEAREST_SCH_RANK':'nearest_sch_rank'}, inplace = Tru
 
 
 #Conversão de inteiros
-conversao_kansas = ["price", "bathrooms", "floors"]
-df_kansas[conversao_kansas] = df_kansas[conversao_kansas].astype(int)
 
 
 
 
 
 #Conversão de datas
-df_kansas['date_sold'] = pd.to_datetime(df_kansas['date_sold'])
-df_kansas['date_sold'] = df_kansas['date_sold'].dt.strftime("%d/%m/%Y")
+
 
 df_perth['date_sold'] = pd.to_datetime(df_perth['date_sold'])
 df_perth['date_sold'] = df_perth['date_sold'].dt.strftime("%m/%Y")
@@ -97,7 +85,7 @@ df_perth['date_sold'] = df_perth['date_sold'].dt.strftime("%m/%Y")
 
 
 # Reescrever os arquivos originais com os DataFrames modificados
-df_kansas.to_csv(data_kansas, index=False)
+df_delhi.to_csv(data_delhi, index=False)
 df_melbourne.to_csv(data_melbourne, index=False)
 df_perth.to_csv(data_perth, index=False)
 
@@ -107,6 +95,6 @@ df_perth.to_csv(data_perth, index=False)
 
 # full join dos 3 dataframes
 
-df_full = pd.concat([df_kansas, df_melbourne, df_perth], ignore_index=True)
+df_full = pd.concat([df_delhi, df_melbourne, df_perth], ignore_index=True)
 df_full.to_csv("datasetfiles/full_housing.csv", index=False)
 
