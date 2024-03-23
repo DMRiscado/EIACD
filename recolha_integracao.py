@@ -12,15 +12,18 @@ df_delhi = pd.read_csv(data_delhi)
 df_melbourne = pd.read_csv(data_melbourne)
 df_perth = pd.read_csv(data_perth)
 
-# Eliminação de colunas desnecessárias se as colunas existirem no DataFrame
-if set(["Status", "newoorold", "Furnished_status", "Lift", "Landmarks", "desc", "Unnamed: 0"]).issubset(df_delhi.columns):
-    df_delhi.drop(["Status", "newoorold", "Furnished_status", "Lift", "Landmarks", "desc", "Unnamed: 0"], axis=1, inplace=True)
+# Eliminação de colunas desnecessárias se as colunas existirem no DataFrame, COMENTADO PARA NÃO ACUSAR ERRO
 
-if set(["Rooms", "Method", "SellerG", "Distance", "LandSize", "BuildingArea", "CouncilArea", "Regionname", "Propertycount", "Unnamed: 0"]).issubset(df_melbourne.columns):
-    df_melbourne.drop(["Rooms", "Method", "SellerG", "Distance", "LandSize", "BuildingArea", "CouncilArea", "Regionname", "Propertycount", "Unnamed: 0"], axis=1, inplace=True)
+#delhi_drop = ["Status", "neworold", "Furnished_status", "Lift", "Landmarks", "desc", "Unnamed: 0"]
+#df_delhi.drop(columns=delhi_drop, inplace=True)
 
-if set(["CBD_DIST", "NEAREST_STN","NEAREST_STN_DIST", "NEAREST_SCH", "NEAREST_SCH_DIST", "NEAREST_SCH_RANK", "Unnamed: 0"]).issubset(df_perth.columns):
-    df_perth.drop(["CBD_DIST", "NEAREST_STN","NEAREST_STN_DIST", "NEAREST_SCH", "NEAREST_SCH_DIST", "NEAREST_SCH_RANK", "Unnamed: 0"], axis=1, inplace=True)
+#melbourne_drop = ["Rooms", "Method", "SellerG", "Distance", "Landsize", "BuildingArea", "CouncilArea", "Regionname", "Propertycount", "Unnamed: 0"]
+#df_melbourne.drop(columns=melbourne_drop, inplace=True)
+
+#perth_drop = ["CBD_DIST", "NEAREST_STN","NEAREST_STN_DIST", "NEAREST_SCH", "NEAREST_SCH_DIST", "NEAREST_SCH_RANK"]
+#df_perth.drop(columns=perth_drop, inplace=True)
+
+
 
 # Renomear colunas Delhi
 df_delhi.rename(columns = {'price':'price'}, inplace = True)
