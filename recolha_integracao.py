@@ -95,10 +95,11 @@ df_perth.rename(columns = {'LONGITUDE':'longitude'}, inplace = True)
 
 #taxa_delhi = 0.011
 #df_delhi['price'] *= taxa_delhi
+#df_delhi['price_sqft'] = df_delhi['price_sqft'] * taxa_delhi
 
-# taxa_australia= 0.60
-# df_melbourne['price'] *= taxa_australia
-# df_perth['price'] *= taxa_australia
+#taxa_australia= 0.60
+#df_melbourne['price'] *= taxa_australia
+#df_perth['price'] *= taxa_australia
 
 
 # Reescrever os arquivos originais com os DataFrames modificados
