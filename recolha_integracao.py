@@ -91,6 +91,14 @@ for col in cols_to_convert_melbourne:
 #df_melbourne['date_sold'] = pd.to_datetime(df_melbourne['date_sold'], format= "%d/%m/%Y")
 #df_melbourne['date_sold'] = df_melbourne['date_sold'].dt.strftime("%m/%Y")
 
+#Conversão de preços para euros
+
+#taxa_delhi = 0.011
+#df_delhi['price'] *= taxa_delhi
+
+
+
+
 # Reescrever os arquivos originais com os DataFrames modificados
 df_delhi.to_csv(data_delhi, index=False)
 df_melbourne.to_csv(data_melbourne, index=False)
