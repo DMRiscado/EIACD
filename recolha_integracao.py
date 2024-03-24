@@ -71,18 +71,18 @@ df_perth.rename(columns = {'LONGITUDE':'longitude'}, inplace = True)
 #Conversão de dados em inteiros
 
 # Lista das colunas a serem convertidas para inteiros em cada DataFrame
-cols_to_convert_delhi = ['price', 'sqft_living', 'bedrooms', 'bathrooms','balcony', 'car_garage', 'price_sqft']
-cols_to_convert_perth = ['car_garage', 'year_built']
-cols_to_convert_melbourne = ['zipcode', 'bedrooms', 'bathrooms', 'car_garage', 'year_built', 'sqft_living']
-
-for col in cols_to_convert_delhi:
-    df_delhi[col] = pd.to_numeric(df_delhi[col], errors='coerce').astype('Int64')
-
-for col in cols_to_convert_perth:
-    df_perth[col] = pd.to_numeric(df_perth[col], errors='coerce').astype('Int64')
-
-for col in cols_to_convert_melbourne:
-    df_melbourne[col] = pd.to_numeric(df_melbourne[col], errors='coerce').astype('Int64')
+# cols_to_convert_delhi = ['price', 'sqft_living', 'bedrooms', 'bathrooms','balcony', 'car_garage', 'price_sqft']
+# cols_to_convert_perth = ['car_garage', 'year_built']
+# cols_to_convert_melbourne = ['zipcode', 'bedrooms', 'bathrooms', 'car_garage', 'year_built', 'sqft_living']
+#
+# for col in cols_to_convert_delhi:
+#     df_delhi[col] = pd.to_numeric(df_delhi[col], errors='coerce').astype('Int64')
+#
+# for col in cols_to_convert_perth:
+#     df_perth[col] = pd.to_numeric(df_perth[col], errors='coerce').astype('Int64')
+#
+# for col in cols_to_convert_melbourne:
+#     df_melbourne[col] = pd.to_numeric(df_melbourne[col], errors='coerce').astype('Int64')
 
 #Conversão de datas; COMENTADO PARA NÃO ACUSAR ERRO
 # df_perth['date_sold'] = pd.to_datetime(df_perth['date_sold'], format= "%m/%Y")
@@ -96,7 +96,9 @@ for col in cols_to_convert_melbourne:
 #taxa_delhi = 0.011
 #df_delhi['price'] *= taxa_delhi
 
-
+# taxa_australia= 0.60
+# df_melbourne['price'] *= taxa_australia
+# df_perth['price'] *= taxa_australia
 
 
 # Reescrever os arquivos originais com os DataFrames modificados
