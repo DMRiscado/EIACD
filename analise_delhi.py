@@ -78,7 +78,7 @@ def price_bedrooms_bathrooms(df_delhi):
     plt.figure(figsize=(10, 6))
     plt.scatter(df_delhi['bedrooms'], df_delhi['bathrooms'], c=df_delhi['price'], cmap='viridis', s=50, alpha=0.5)
     plt.clim(df_delhi['price'].min(), df_delhi['price'].max() * 1)
-    plt.title('Relação entre Preço, Quartos e Casas de Banho')
+    plt.title('Preço em relação a Quartos e Casas de Banho')
     plt.xlabel('Quartos')
     plt.ylabel('Casas de Banho')
     plt.colorbar(label='Preço (em €)')
@@ -89,7 +89,7 @@ def price_bedrooms_bathrooms(df_delhi):
 def price_car_garage(df_delhi):
     plt.figure(figsize=(10, 6))
     plt.scatter(df_delhi['car_garage'], df_delhi['price'], color='blue', alpha=0.5)
-    plt.title('Relação entre Preço e Número de Vagas de Garagem')
+    plt.title('Preço em relação a Número de Vagas de Garagem')
     plt.xlabel('Número de Vagas de Garagem')
     plt.ylabel('Preço (em €)')
     plt.grid(True)

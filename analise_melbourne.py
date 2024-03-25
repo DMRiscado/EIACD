@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import folium
+from mpl_toolkits.mplot3d import Axes3D
 
 data_melbourne = "datasetfiles/melbourne_housing.csv"
 
@@ -38,15 +38,38 @@ def price_suburb(df_melbourne):
 
 def price_bedrooms_bathrooms(df_melbourne):
     plt.figure(figsize=(10, 6))
-    df_melbourne.groupby(['bedrooms', 'bathrooms'])['price'].mean().unstack().plot(kind='bar', stacked=True)
-    plt.title('Preço Médio por Quartos e Banheiros')
+    df_melbourne.groupby(['bedrooms', 'bathrooms'])['price'].mean().unstack().plot(kind='bar', stacked=True,)
+    plt.title('Preço em relação aos Quartos e Casas de Banho')
     plt.xlabel('Quartos')
-    plt.ylabel('Preço Médio')
+    plt.ylabel('Preço (em €)')
     plt.xticks(rotation=0)
     plt.legend(title='Banheiros')
     plt.show()
+def type(df_melbourne):
+    type_counts = df_melbourne['type'].value_counts(normalize=True) * 100
+    plt.figure(figsize=(9, 8))
+    plt.pie(type_counts, labels=type_counts.index, autopct='%1.1f%%', startangle=140)
+    plt.title('Distribuição Percentual dos Tipos de Casas')
+    plt.axis('equal')
+    plt.text(-1.5, -1.3,
+             'h: House,Cottage,Villa, Semi,Terrace\nu:  Unit, Duplex\nt: Townhouse',
+             fontsize=12,
+             bbox=dict(facecolor='lightgrey', alpha=0.5))
+    plt.show()
+
 def price_type(df_melbourne):
-    pass
+    price_mean_by_type = df_melbourne.groupby('type')['price'].mean()
+    plt.figure(figsize=(10, 6))
+    price_mean_by_type.plot(kind='bar', color='skyblue')
+    plt.title('Preço médio em relação ao Tipo de Casa')
+    plt.xlabel('Tipo de Casa')
+    plt.ylabel('Preço (em €)')
+    plt.xticks(rotation=0)
+    plt.text(1.2, 650000,
+             'h: House,Cottage,Villa, Semi,Terrace\nu:  Unit, Duplex\nt: Townhouse',
+             fontsize=12,
+             bbox=dict(facecolor='lightgrey', alpha=0.5))
+    plt.show()
 
 
 def price_sqft_living(df_melbourne):
@@ -60,7 +83,13 @@ def price_sqft_living(df_melbourne):
     plt.show()
 
 def price_car_garage(df_melbourne):
-    pass
+    plt.figure(figsize=(10, 6))
+    df_melbourne.groupby('car_garage')['price'].mean().plot(kind='bar')
+    plt.title('Preço Médio por Número de Vagas na Garagem')
+    plt.xlabel('Número de Vagas de Garagem')
+    plt.ylabel('Preço (em €)')
+    plt.xticks(rotation=0)
+    plt.show()
 
 def price_latitude_longitude(df_melbourne):
     plt.figure(figsize=(10, 6))
@@ -96,10 +125,16 @@ def price_year_built(df_melbourne):
 
 
 def price_zipcode(df_melbourne):
-    pass
+    plt.figure(figsize=(12, 6))
+    df_melbourne.groupby('zipcode')['price'].mean().sort_values().plot(kind='bar')
+    plt.title('Preço Médio por Código Postal')
+    plt.xlabel('Código Postal (Zipcode)')
+    plt.ylabel('Preço Médio')
+    plt.xticks(rotation=45)
+    plt.show()
 
 
-def sqft_living_year_build(df_melbourne):
+def sqft_living_year_built(df_melbourne):
     plt.figure(figsize=(10, 6))
     plt.scatter("year_built", "sqft_living", data=df_melbourne, color='blue', alpha=0.5)
     plt.title('Comparação entre Ano de Construção e Área Construída')
@@ -108,13 +143,18 @@ def sqft_living_year_build(df_melbourne):
     plt.grid(True)
     plt.show()
 
-def suburb_year_build(df_melbourne):
-    pass
-
-
+def suburb_year_built(df_melbourne):
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df_melbourne['suburb'], df_melbourne['year_built'], color='blue', alpha=0.5)
+    plt.title('Ano de contrução por Subúrbio')
+    plt.xlabel('Subúrbio')
+    plt.ylabel('Ano de Construção')
+    plt.grid(True)
+    plt.show()
 
 #price_suburb(df_melbourne)
-price_bedrooms_bathrooms(df_melbourne)
+#price_bedrooms_bathrooms(df_melbourne)
+#type(df_melbourne)
 #price_type(df_melbourne)
 #price_sqft_living(df_melbourne)
 #price_car_garage(df_melbourne)
@@ -122,5 +162,19 @@ price_bedrooms_bathrooms(df_melbourne)
 #price_date_sold(df_melbourne)
 #price_year_built(df_melbourne)
 #price_zipcode(df_melbourne)
-#sqft_living_year_build(df_melbourne)
-#suburb_year_build(df_melbourne)
+#sqft_living_year_built(df_melbourne)
+#suburb_year_built(df_melbourne)
+
+
+#Tabelas de Frequência
+
+freq_bedrooms = df_melbourne['bedrooms'].value_counts().sort_index()
+freq_bathrooms = df_melbourne['bathrooms'].value_counts().sort_index()
+freq_car_garage = df_melbourne['car_garage'].value_counts().sort_index()
+tabela_frequencia = pd.DataFrame({
+    'Bedrooms': freq_bedrooms,
+    'Bathrooms': freq_bathrooms,
+    'Car Garage': freq_car_garage
+})
+tabela_frequencia = tabela_frequencia.fillna(0)
+print(tabela_frequencia)
