@@ -3,25 +3,37 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import folium
-# importar dataset
+from scipy.stats import skew
+
+# importar datasets
+data_delhi = "datasetfiles/delhi_housing.csv"
+df_delhi = pd.read_csv(data_delhi)
+
+data_melbourne = "datasetfiles/melbourne_housing.csv"
+df_melbourne = pd.read_csv(data_melbourne)
+
+data_perth = "datasetfiles/perth_housing.csv"
+df_perth = pd.read_csv(data_perth)
+
+
 data_total= "datasetfiles\concatenated_housing.csv"
 df_analise = pd.read_csv(data_total)
 
-# mediana dos metros quarados disponiveis
-median_sqft = df_analise['sqft_living'].median()
-print("Mediana de metros quadrados disponíveis: ", median_sqft)
-
-# mediana dos preços
-median_price = df_analise['price'].median()
-print("Mediana dos preços: ", median_price)
-
-#média dos preços
-mean_price = df_analise['price'].mean()
-print("Média dos preços: ", mean_price)
-
-#média dos quartos disponíveis arredondada
-mean_bedrooms = round(df_analise['bedrooms'].mean())
-print("Média dos quartos disponíveis: ", mean_bedrooms)
+# # mediana dos metros quarados disponiveis
+# median_sqft = df_analise['sqft_living'].median()
+# print("Mediana de metros quadrados disponíveis: ", median_sqft)
+#
+# # mediana dos preços
+# median_price = df_analise['price'].median()
+# print("Mediana dos preços: ", median_price)
+#
+# #média dos preços
+# mean_price = df_analise['price'].mean()
+# print("Média dos preços: ", mean_price)
+#
+# #média dos quartos disponíveis arredondada
+# mean_bedrooms = round(df_analise['bedrooms'].mean())
+# print("Média dos quartos disponíveis: ", mean_bedrooms)
 
 #gráfico três dimensões latitude, longitude e preço
 def price_latitude_longitude(df_analise):
@@ -49,18 +61,7 @@ def year_built(df_analise):
 
 
 # gráfico que relaciona ano de construção da casa com número de quartos e casas de banho
-# Create a scatter plot
-differentbuildyears=  df_analise['year_built'].value_counts()
 def yrbuilt_bathrooms_bedrooms(df_analise):
-    # plt.figure(figsize=(10, 6))
-    # plt.scatter(df_analise['bedrooms'], df_analise['bathrooms'], c=df_analise['year_built'], cmap='viridis', s=50, alpha=0.5)
-    # plt.clim(df_analise['year_built'].min(), df_analise['year_built'].max() * 1.1)
-    # plt.title('Relação entre Ano de Construção, Quartos e Casas de Banho')
-    # plt.xlabel('Quartos')
-    # plt.ylabel('Casas de Banho')
-    # plt.colorbar(label='Ano de Construção')
-    # plt.grid(True)
-    # plt.show()
     x = df_analise['bathrooms']
     y = df_analise['bedrooms']
     z = df_analise['year_built']
@@ -79,4 +80,22 @@ def yrbuilt_bathrooms_bedrooms(df_analise):
 
     plt.show()
 
-yrbuilt_bathrooms_bedrooms(df_analise)
+
+def sqft_latitude_longitude(df_analise):
+
+    grouped = df_analise.groupby('latitude')
+
+    data = []
+    for name, group in grouped:
+        data.extend(zip(group['latitude'], group['longitude'], group['sqft_living']))
+
+    df_table = pd.DataFrame(data, columns=['Latitude', 'Longitude', 'Square Footage of Living Space'])
+    df_table = df_table.sort_values(by='Latitude')
+    df_table.reset_index(drop=True, inplace=True)
+
+    # Display the DataFrame
+    print(df_table)
+
+
+# Assuming df_analise is your DataFrame
+sqft_latitude_longitude(df_analise)
