@@ -8,16 +8,25 @@ data_delhi = "datasetfiles/delhi_housing.csv"
 df_delhi = pd.read_csv(data_delhi)
 
 media_preco = df_delhi['price'].mean()
+mediana_preco = df_delhi['price'].median()
 print(f"Média dos preços em Delhi: {media_preco:.2f} €")
+print(f"Mediana dos preços em Delhi: {mediana_preco:.2f} €\n")
+
 
 media_quartos = df_delhi["bedrooms"].mean()
+mediana_quartos = round(media_quartos)
 print(f"Média de quartos em Delhi: {int(media_quartos)}")
+print(f"Mediana de quartos em Delhi: {mediana_quartos}\n")
 
 media_wc = df_delhi["bathrooms"].mean()
+mediana_wc = df_delhi["bathrooms"].median()
 print(f"Média de casas de banho em Delhi: {int(media_wc)}")
+print(f"Mediana de casas de banho em Delhi: {mediana_wc}\n")
 
 media_carros = df_delhi["car_garage"].mean()
+mediana_carros = df_delhi["car_garage"].median()
 print(f"Média de carros na garagem em Delhi: {int(media_carros)}")
+print(f"Mediana de carros na garagem em Delhi: {mediana_carros}\n")
 
 
 def price_sqft_living(df_delhi):
@@ -28,11 +37,9 @@ def price_sqft_living(df_delhi):
     plt.ylabel('Preço (em €)')
     plt.grid(True)
     plt.xticks(ticks=range(0, int(df_delhi['sqft_living'].max()) + 1000, 1000))
-    plt.yticks(ticks=range(0, int(df_delhi['price'].max()) + 1000000, 10000000))
     plt.yticks(ticks=range(0, int(df_delhi['price'].max()) + 100000, 100000))
     plt.ticklabel_format(style='plain', axis='y')
     plt.show()
-
 
 def price_type_of_building(df_delhi):
     preco_por_tipo = df_delhi.groupby('type_of_building')['price'].mean()
@@ -80,14 +87,14 @@ def price_bedrooms_bathrooms(df_delhi):
 
 
 def price_car_garage(df_delhi):
-    fig = plt.figure(figsize=(10, 8))
-    ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(df_delhi['longitude'], df_delhi['latitude'], df_delhi['price_sqft'], c='blue', marker='o', alpha=0.5)
-    ax.set_title('Relação entre Preço por metro quadrado, Latitude e Longitude')
-    ax.set_xlabel('Longitude')
-    ax.set_ylabel('Latitude')
-    ax.set_zlabel('Preço por metro quadrado (em €/m²)')
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df_delhi['car_garage'], df_delhi['price'], color='blue', alpha=0.5)
+    plt.title('Relação entre Preço e Número de Vagas de Garagem')
+    plt.xlabel('Número de Vagas de Garagem')
+    plt.ylabel('Preço (em €)')
+    plt.grid(True)
     plt.show()
+
 
 def type_of_building_latitude_longitude(df_delhi):
     plt.figure(figsize=(10, 6))
@@ -135,3 +142,4 @@ tabela_frequencia = pd.DataFrame({
 })
 tabela_frequencia = tabela_frequencia.fillna(0)
 print(tabela_frequencia)
+
