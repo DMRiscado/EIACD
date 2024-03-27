@@ -120,7 +120,7 @@ def price_date_sold(df_melbourne): #Preço em relação à Data de Venda
     plt.figure(figsize=(10, 6))
     df_melbourne['date_sold'] = pd.to_datetime(df_melbourne['date_sold'], format='%m/%Y')
     df_melbourne.groupby(df_melbourne['date_sold'].dt.strftime('%Y-%m'))['price'].mean().plot(kind='line', marker='o')
-    plt.title('Preço emr relação à Data de Venda')
+    plt.title('Preço em relação à Data de Venda')
     plt.xlabel('Data de Venda')
     plt.ylabel('Preço (em €)')
     plt.xticks(rotation=0)

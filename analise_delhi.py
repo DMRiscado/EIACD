@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#Daraframe de Delhi
+#Dataframe de Delhi
 
 data_delhi = "datasetfiles/delhi_housing.csv"
 df_delhi = pd.read_csv(data_delhi)
@@ -36,7 +36,7 @@ print("__________________________________________________________\n")
 def price_sqft_living(df_delhi): #Preço em relação à Área Construída
     plt.figure(figsize=(10, 6))
     plt.scatter("sqft_living", "price", data=df_delhi, color='blue', alpha=0.5)
-    plt.title('Preço em relção à Área Construída')
+    plt.title('Preço em relação à Área Construída')
     plt.xlabel('Área Construída (em m²)')
     plt.ylabel('Preço (em €)')
     plt.grid(True)
@@ -62,7 +62,7 @@ def price_balcony(df_delhi): #Preço Médio por Varanda
     plt.figure(figsize=(10, 6))
     preco_por_varanda = df_delhi.groupby('balcony')['price'].mean()
     preco_por_varanda.plot(kind='bar', color='blue')
-    plt.title('Preço Médio por Varanda')
+    plt.title('Preço Médio por Número de Varandas')
     plt.xlabel('Varandas')
     plt.ylabel('Preço Médio (em €)')
     plt.xticks(rotation=1)
@@ -146,13 +146,12 @@ print("__________________________________________________________\n")
 
 #Funções de Análise, Para serem executadas é retirar o "#" da frente de cada função
 
-#price_sqft_living(df_delhi)
-#price_type_of_building(df_delhi)
-#price_balcony(df_delhi)
-#price_latitude_longitude(df_delhi)
-#price_bedrooms_bathrooms(df_delhi)
-#price_car_garage(df_delhi)
-#type_of_building_latitude_longitude(df_delhi)
-#price_sqft_latitude_longitude(df_delhi)
-
+price_sqft_living(df_delhi)
+price_type_of_building(df_delhi)
+price_balcony(df_delhi)
+price_latitude_longitude(df_delhi)
+price_bedrooms_bathrooms(df_delhi)
+price_car_garage(df_delhi)
+type_of_building_latitude_longitude(df_delhi)
+price_sqft_latitude_longitude(df_delhi)
 

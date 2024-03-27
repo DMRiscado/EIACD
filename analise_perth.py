@@ -35,7 +35,7 @@ print("__________________________________________________________\n")
 
 #Funções de Análise
 
-def price_suburb(df_perth):
+def price_suburb(df_perth): #Preço Médio por Subúrbio
     preco_por_suburb = df_perth.groupby('suburb')['price'].mean().reset_index()
     preco_por_suburb.columns = ['Subúrbio', 'Preço Médio (em €)']
     preco_por_suburb['Preço Médio (em €)'] = preco_por_suburb['Preço Médio (em €)'].round(2)
