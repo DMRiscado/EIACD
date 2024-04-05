@@ -42,15 +42,16 @@ def price_suburb(df_melbourne): #Preço Médio por Subúrbio
     print(preco_por_suburb_sorted)
 
 
-def price_bedrooms_bathrooms(df_melbourne): #Preço em relação aos Quartos e Casas de Banho
+def price_bedrooms_bathrooms(df_melbourne): #Preço em relação a Quartos e Casas de Banho
     plt.figure(figsize=(10, 6))
-    df_melbourne.groupby(['bedrooms', 'bathrooms'])['price'].mean().unstack().plot(kind='bar', stacked=True,)
-    plt.title('Preço em relação aos Quartos e Casas de Banho')
+    plt.scatter(df_melbourne['bedrooms'], df_melbourne['bathrooms'], c=df_melbourne['price'], cmap='viridis', s=50, alpha=1)
+    plt.clim(df_melbourne['price'].min(), df_melbourne['price'].max() * 1)
+    plt.xticks(ticks=range(0, int(df_melbourne['bedrooms'].max()) + 2, 2))
+    plt.title('Preço em relação a Quartos e Casas de Banho')
     plt.xlabel('Quartos')
-    plt.ylabel('Preço (em €)')
-    plt.xticks(rotation=0)
-    plt.legend(title='Casas de Banho')
-    plt.ticklabel_format(axis='y', style='plain')
+    plt.ylabel('Casas de Banho')
+    plt.colorbar(label='Preço (em €)')
+    plt.grid(True)
     plt.show()
 
 
@@ -85,7 +86,7 @@ def price_type(df_melbourne): #Preço Médio por Tipo de Casa
 def price_sqft_living(df_melbourne): #Preço em relação à Área Construída
     plt.figure(figsize=(10, 6))
     plt.scatter("sqft_living", "price", data=df_melbourne, color='blue', alpha=0.5)
-    plt.title('Preço em relção à Área Construída')
+    plt.title('Preço em relação à Área Construída')
     plt.xlabel('Área Construída (em m²)')
     plt.ylabel('Preço (em €)')
     plt.grid(True)
@@ -190,6 +191,7 @@ print("__________________________________________________________\n")
 
 #Funções de Análise, Para serem executadas é retirar o "#" da frente de cada função
 
+
 price_suburb(df_melbourne)
 price_bedrooms_bathrooms(df_melbourne)
 type(df_melbourne)
@@ -203,4 +205,20 @@ price_zipcode(df_melbourne)
 sqft_living_year_built(df_melbourne)
 suburb_year_built(df_melbourne)
 year_built(df_melbourne)
+
+
+# price_suburb(df_melbourne)
+# price_bedrooms_bathrooms(df_melbourne)
+# type(df_melbourne)
+# price_type(df_melbourne)
+# price_sqft_living(df_melbourne)
+# price_car_garage(df_melbourne)
+# price_latitude_longitude(df_melbourne)
+# price_date_sold(df_melbourne)
+# price_year_built(df_melbourne)
+# price_zipcode(df_melbourne)
+# sqft_living_year_built(df_melbourne)
+# suburb_year_built(df_melbourne)
+# year_built(df_melbourne)
+#
 

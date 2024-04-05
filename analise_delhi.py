@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.stats import pearsonr
 
 #Dataframe de Delhi
 
@@ -40,7 +41,6 @@ def price_sqft_living(df_delhi): #Preço em relação à Área Construída
     plt.xlabel('Área Construída (em m²)')
     plt.ylabel('Preço (em €)')
     plt.grid(True)
-    plt.xticks(ticks=range(0, int(df_delhi['sqft_living'].max()) + 1000, 1000))
     plt.yticks(ticks=range(0, int(df_delhi['price'].max()) + 100000, 100000))
     plt.ticklabel_format(style='plain', axis='y')
     plt.show()
@@ -92,7 +92,7 @@ def price_bedrooms_bathrooms(df_delhi): #Preço em relação a Quartos e Casas d
     plt.colorbar(label='Preço (em €)')
     plt.grid(True)
     plt.show()
-
+# Perceber a distribuição (Gaussiana?)
 
 def price_car_garage(df_delhi): #Preço Médio por Número de Vagas na Garagem
     plt.figure(figsize=(10, 6))
@@ -128,30 +128,35 @@ def price_sqft_latitude_longitude(df_delhi): #Preço por metro quadrado em rela�
     plt.grid(True)
     plt.show()
 
+def pearson_correlation_price_sqft(df_delhi):
+    corr, _ = pearsonr(df_delhi['sqft_living'], df_delhi['price'])
+    print('Correlação de Pearson para os metros quadrados úteis da casa e preço: %.3f' % corr)
 
 #Tabelas de Frequência, quartos, casas de banho e carros na garagem em Delhi
 
-print("Tabela de Frequência de Quartos, Casas de Banho e Carros na Garagem em Delhi:")
-freq_bedrooms = df_delhi['bedrooms'].value_counts().sort_index()
-freq_bathrooms = df_delhi['bathrooms'].value_counts().sort_index()
-freq_car_garage = df_delhi['car_garage'].value_counts().sort_index()
-tabela_frequencia = pd.DataFrame({
-    'Bedrooms': freq_bedrooms,
-    'Bathrooms': freq_bathrooms,
-    'Car Garage': freq_car_garage
-})
-tabela_frequencia = tabela_frequencia.fillna(0)
-print(tabela_frequencia)
-print("__________________________________________________________\n")
+def freq_table(df_delhi):
+    print("Tabela de Frequência de Quartos, Casas de Banho e Carros na Garagem em Delhi:")
+    freq_bedrooms = df_delhi['bedrooms'].value_counts().sort_index()
+    freq_bathrooms = df_delhi['bathrooms'].value_counts().sort_index()
+    freq_car_garage = df_delhi['car_garage'].value_counts().sort_index()
+    tabela_frequencia = pd.DataFrame({
+        'Bedrooms': freq_bedrooms,
+        'Bathrooms': freq_bathrooms,
+        'Car Garage': freq_car_garage
+    })
+    tabela_frequencia = tabela_frequencia.fillna(0)
+    print(tabela_frequencia)
+    print("__________________________________________________________\n")
 
 #Funções de Análise, Para serem executadas é retirar o "#" da frente de cada função
 
-price_sqft_living(df_delhi)
-price_type_of_building(df_delhi)
-price_balcony(df_delhi)
-price_latitude_longitude(df_delhi)
-price_bedrooms_bathrooms(df_delhi)
-price_car_garage(df_delhi)
-type_of_building_latitude_longitude(df_delhi)
-price_sqft_latitude_longitude(df_delhi)
-
+# price_sqft_living(df_delhi)
+# price_type_of_building(df_delhi)
+# price_balcony(df_delhi)
+# price_latitude_longitude(df_delhi)
+# price_bedrooms_bathrooms(df_delhi)
+# price_car_garage(df_delhi)
+# type_of_building_latitude_longitude(df_delhi)
+# price_sqft_latitude_longitude(df_delhi)
+# pearson_correlation_price_sqft(df_delhi)
+# freq_table(df_delhi)

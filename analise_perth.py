@@ -150,3 +150,5 @@ price_latitude_longitude(df_perth)
 price_year_built(df_perth)
 sqft_lot_sqft_living(df_perth)
 year_built(df_perth)
+
+

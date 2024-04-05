@@ -101,11 +101,16 @@ df_perth.rename(columns = {'LONGITUDE':'longitude'}, inplace = True)
 #df_melbourne['price'] *= taxa_australia
 #df_perth['price'] *= taxa_australia
 
+#conversao sqft sqm
+# taxa_sqm= 0.09290304
+#
+# df_delhi['sqft_living'] *= taxa_sqm
+# df_delhi['price_sqft'] /= taxa_sqm
+#
+# # Reescrever os arquivos originais com os DataFrames modificados
+# df_delhi.to_csv(data_delhi, index=False)
 
-# Reescrever os arquivos originais com os DataFrames modificados
-df_delhi.to_csv(data_delhi, index=False)
-df_melbourne.to_csv(data_melbourne, index=False)
-df_perth.to_csv(data_perth, index=False)
+
 
 
 #print(df_delhi.dtypes)
@@ -114,9 +119,12 @@ df_perth.to_csv(data_perth, index=False)
 
 #Concatenar os datasets depois de apurados e gravá-los numa novo CSV
 
-concatenated_df = pd.concat([df_delhi, df_melbourne, df_perth], ignore_index=True)
+# concatenated_df = pd.concat([df_delhi, df_melbourne, df_perth], ignore_index=True)
+#
+# concatenated_df.to_csv("datasetfiles/concatenated_housing.csv", index=False)
 
-concatenated_df.to_csv("datasetfiles/concatenated_housing.csv", index=False)
 
+# Criar um dataset para análise em território australiano
 
-
+australian_df= pd.concat([df_perth,df_melbourne], ignore_index=True)
+australian_df.to_csv("datasetfiles/australian_housing.csv", index=False)
