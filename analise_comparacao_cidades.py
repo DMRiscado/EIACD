@@ -5,6 +5,7 @@ import seaborn as sns
 import folium
 from scipy.stats import skew, spearmanr, pearsonr
 
+
 # importar datasets
 data_delhi = "datasetfiles/delhi_housing.csv"
 df_delhi = pd.read_csv(data_delhi)
@@ -228,6 +229,9 @@ def number_bedrooms_price_under_six(df_analise):
     g.map(sns.histplot, "price")
     g.set(xlim=(0, 2000000))
     plt.show()
+
+
+
 
 
 

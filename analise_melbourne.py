@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 
 #Daraframe de Melbourne
 
@@ -206,7 +207,10 @@ def tabelas_frequencia(df_melbourne):
     print("__________________________________________________________\n")
 
 
-#Funções de Análise, Para serem executadas é retirar o "#" da frente de cada função
+
+
+
+# Execução das funções
 
 
 # avg_median_price(df_melbourne)

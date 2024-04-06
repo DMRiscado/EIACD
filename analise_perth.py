@@ -153,7 +153,7 @@ def tabela_frequencia(df_perth):
     print("__________________________________________________________\n")
 
 
-#Funções de Análise, Para serem executadas é retirar o "#" da frente de cada função
+# Execução das funções
 
 # avg_median_price(df_perth)
 # avg_median_bedrooms(df_perth)

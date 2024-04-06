@@ -109,8 +109,6 @@ df_perth.rename(columns = {'LONGITUDE':'longitude'}, inplace = True)
 #df_delhi.to_csv(data_delhi, index=False)
 
 
-
-
 #print(df_delhi.dtypes)
 #print(df_melbourne.dtypes)
 #print(df_perth.dtypes)

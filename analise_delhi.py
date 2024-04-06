@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import pearsonr
+import plotly.express as px
 
 #Dataframe de Delhi
 
@@ -101,7 +102,7 @@ def price_bedrooms_bathrooms(df_delhi):
     plt.colorbar(label='Preço (em €)')
     plt.grid(True)
     plt.show()
-# Perceber a distribuição (Gaussiana?)
+
 
 #Preço Médio por Número de Vagas na Garagem
 
@@ -140,6 +141,7 @@ def price_sqft_latitude_longitude(df_delhi):
     scatter = plt.scatter([], [], c=[], cmap='viridis')
     plt.grid(True)
     plt.show()
+    # Perceber a distribuição (Gaussiana?)
 
 # Correlação de Pearson entre preço e metros quadrados
 
@@ -162,7 +164,17 @@ def freq_table(df_delhi):
     tabela_frequencia = tabela_frequencia.fillna(0)
     print(tabela_frequencia)
 
-#Funções de Análise, Para serem executadas é retirar o "#" da frente de cada função
+def map_plot_price(df_delhi):
+    fig = px.scatter_mapbox(df_delhi, lat="latitude", lon="longitude", color="price",
+                            center=dict(lat=28.70, lon=77.10), zoom=8,
+                            color_continuous_scale=px.colors.cyclical.IceFire,
+                            range_color=[df_delhi['price'].min(), df_delhi['price'].max()])  #coordenadas centrais de Delhi
+    fig.update_layout(mapbox_style="open-street-map")
+    fig.show()
+
+
+
+# Execução das funções
 
 # avg_median_price(df_delhi)
 # avg_median_bedrooms(df_delhi)
@@ -178,3 +190,4 @@ def freq_table(df_delhi):
 # price_sqft_latitude_longitude(df_delhi)
 # pearson_correlation_price_sqft(df_delhi)
 # freq_table(df_delhi)
+# map_plot_price(df_delhi)
