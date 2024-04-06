@@ -23,8 +23,6 @@ df_perth = pd.read_csv(data_perth)
 #perth_drop = ["CBD_DIST", "NEAREST_STN","NEAREST_STN_DIST", "NEAREST_SCH", "NEAREST_SCH_DIST", "NEAREST_SCH_RANK"]
 #df_perth.drop(columns=perth_drop, inplace=True)
 
-
-
 # Renomear colunas Delhi
 df_delhi.rename(columns = {'price':'price'}, inplace = True)
 df_delhi.rename(columns = {'Address':'address'}, inplace = True)
@@ -70,19 +68,19 @@ df_perth.rename(columns = {'LONGITUDE':'longitude'}, inplace = True)
 
 #Conversão de dados em inteiros
 
-# Lista das colunas a serem convertidas para inteiros em cada DataFrame
-# cols_to_convert_delhi = ['price', 'sqft_living', 'bedrooms', 'bathrooms','balcony', 'car_garage', 'price_sqft']
-# cols_to_convert_perth = ['car_garage', 'year_built']
-# cols_to_convert_melbourne = ['zipcode', 'bedrooms', 'bathrooms', 'car_garage', 'year_built', 'sqft_living']
-#
-# for col in cols_to_convert_delhi:
-#     df_delhi[col] = pd.to_numeric(df_delhi[col], errors='coerce').astype('Int64')
-#
-# for col in cols_to_convert_perth:
-#     df_perth[col] = pd.to_numeric(df_perth[col], errors='coerce').astype('Int64')
-#
-# for col in cols_to_convert_melbourne:
-#     df_melbourne[col] = pd.to_numeric(df_melbourne[col], errors='coerce').astype('Int64')
+#Lista das colunas a serem convertidas para inteiros em cada DataFrame
+#cols_to_convert_delhi = ['price', 'sqft_living', 'bedrooms', 'bathrooms','balcony', 'car_garage', 'price_sqft']
+#cols_to_convert_perth = ['car_garage', 'year_built']
+#cols_to_convert_melbourne = ['zipcode', 'bedrooms', 'bathrooms', 'car_garage', 'year_built', 'sqft_living']
+
+#for col in cols_to_convert_delhi:
+#    df_delhi[col] = pd.to_numeric(df_delhi[col], errors='coerce').astype('Int64')
+
+#for col in cols_to_convert_perth:
+#    df_perth[col] = pd.to_numeric(df_perth[col], errors='coerce').astype('Int64')
+
+#for col in cols_to_convert_melbourne:
+#    df_melbourne[col] = pd.to_numeric(df_melbourne[col], errors='coerce').astype('Int64')
 
 #Conversão de datas; COMENTADO PARA NÃO ACUSAR ERRO
 # df_perth['date_sold'] = pd.to_datetime(df_perth['date_sold'], format= "%m/%Y")
@@ -102,13 +100,13 @@ df_perth.rename(columns = {'LONGITUDE':'longitude'}, inplace = True)
 #df_perth['price'] *= taxa_australia
 
 #conversao sqft sqm
-# taxa_sqm= 0.09290304
-#
-# df_delhi['sqft_living'] *= taxa_sqm
-# df_delhi['price_sqft'] /= taxa_sqm
-#
-# # Reescrever os arquivos originais com os DataFrames modificados
-# df_delhi.to_csv(data_delhi, index=False)
+#taxa_sqm= 0.09290304
+
+#df_delhi['sqft_living'] *= taxa_sqm
+#df_delhi['price_sqft'] /= taxa_sqm
+
+#Reescrever os arquivos originais com os DataFrames modificados
+#df_delhi.to_csv(data_delhi, index=False)
 
 
 
@@ -119,12 +117,11 @@ df_perth.rename(columns = {'LONGITUDE':'longitude'}, inplace = True)
 
 #Concatenar os datasets depois de apurados e gravá-los numa novo CSV
 
-# concatenated_df = pd.concat([df_delhi, df_melbourne, df_perth], ignore_index=True)
-#
-# concatenated_df.to_csv("datasetfiles/concatenated_housing.csv", index=False)
+#concatenated_df = pd.concat([df_delhi, df_melbourne, df_perth], ignore_index=True)
+#concatenated_df.to_csv("datasetfiles/concatenated_housing.csv", index=False)
 
 
-# Criar um dataset para análise em território australiano
+#Criar um dataset para análise em território australiano
 
-australian_df= pd.concat([df_perth,df_melbourne], ignore_index=True)
-australian_df.to_csv("datasetfiles/australian_housing.csv", index=False)
+#australian_df= pd.concat([df_perth,df_melbourne], ignore_index=True)
+#australian_df.to_csv("datasetfiles/australian_housing.csv", index=False)

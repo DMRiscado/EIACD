@@ -10,31 +10,36 @@ df_delhi = pd.read_csv(data_delhi)
 
 #Média e Mediana dos preços, quartos, casas de banho e carros na garagem em Delhi
 
-media_preco = df_delhi['price'].mean()
-mediana_preco = df_delhi['price'].median()
-print(f"Média dos preços em Delhi: {media_preco:.2f} €")
-print(f"Mediana dos preços em Delhi: {mediana_preco:.2f} €\n")
+def avg_median_price(df_delhi):
+    media_preco = df_delhi['price'].mean()
+    mediana_preco = df_delhi['price'].median()
+    print(f"Média dos preços em Delhi: {media_preco:.2f} €")
+    print(f"Mediana dos preços em Delhi: {mediana_preco:.2f} €\n")
 
+def avg_median_bedrooms(df_delhi):
+    media_quartos = df_delhi["bedrooms"].mean()
+    mediana_quartos = round(media_quartos)
+    print(f"Média de quartos em Delhi: {int(media_quartos)}")
+    print(f"Mediana de quartos em Delhi: {mediana_quartos}\n")
 
-media_quartos = df_delhi["bedrooms"].mean()
-mediana_quartos = round(media_quartos)
-print(f"Média de quartos em Delhi: {int(media_quartos)}")
-print(f"Mediana de quartos em Delhi: {mediana_quartos}\n")
+def avg_median_bathrooms(df_delhi):
+    media_wc = df_delhi["bathrooms"].mean()
+    mediana_wc = df_delhi["bathrooms"].median()
+    print(f"Média de casas de banho em Delhi: {int(media_wc)}")
+    print(f"Mediana de casas de banho em Delhi: {mediana_wc}\n")
 
-media_wc = df_delhi["bathrooms"].mean()
-mediana_wc = df_delhi["bathrooms"].median()
-print(f"Média de casas de banho em Delhi: {int(media_wc)}")
-print(f"Mediana de casas de banho em Delhi: {mediana_wc}\n")
+def avg_median_garage(df_delhi):
+    media_carros = df_delhi["car_garage"].mean()
+    mediana_carros = df_delhi["car_garage"].median()
+    print(f"Média de carros na garagem em Delhi: {int(media_carros)}")
+    print(f"Mediana de carros na garagem em Delhi: {mediana_carros}\n")
 
-media_carros = df_delhi["car_garage"].mean()
-mediana_carros = df_delhi["car_garage"].median()
-print(f"Média de carros na garagem em Delhi: {int(media_carros)}")
-print(f"Mediana de carros na garagem em Delhi: {mediana_carros}\n")
-print("__________________________________________________________\n")
 
 #Funções de Análise
 
-def price_sqft_living(df_delhi): #Preço em relação à Área Construída
+#Preço em relação à Área Construída
+
+def price_sqft_living(df_delhi):
     plt.figure(figsize=(10, 6))
     plt.scatter("sqft_living", "price", data=df_delhi, color='blue', alpha=0.5)
     plt.title('Preço em relação à Área Construída')
@@ -45,8 +50,9 @@ def price_sqft_living(df_delhi): #Preço em relação à Área Construída
     plt.ticklabel_format(style='plain', axis='y')
     plt.show()
 
+#Preço Médio por Tipo de Construção
 
-def price_type_of_building(df_delhi): #Preço Médio por Tipo de Construção
+def price_type_of_building(df_delhi):
     plt.figure(figsize=(10, 6))
     preco_por_tipo = df_delhi.groupby('type_of_building')['price'].mean()
     preco_por_tipo.plot(kind='bar', color='blue')
@@ -57,8 +63,9 @@ def price_type_of_building(df_delhi): #Preço Médio por Tipo de Construção
     plt.grid(axis='y')
     plt.show()
 
+#Preço Médio por Varanda
 
-def price_balcony(df_delhi): #Preço Médio por Varanda
+def price_balcony(df_delhi):
     plt.figure(figsize=(10, 6))
     preco_por_varanda = df_delhi.groupby('balcony')['price'].mean()
     preco_por_varanda.plot(kind='bar', color='blue')
@@ -69,8 +76,9 @@ def price_balcony(df_delhi): #Preço Médio por Varanda
     plt.grid(axis='y')
     plt.show()
 
+#Preço em relação à Localização Geográfica
 
-def price_latitude_longitude(df_delhi): #Preço em relação à Localização Geográfica
+def price_latitude_longitude(df_delhi):
     plt.figure(figsize=(10, 6))
     plt.scatter(df_delhi['longitude'], df_delhi['latitude'], c=df_delhi['price'], cmap='viridis', s=50, alpha=0.5)
     plt.clim(df_delhi['price'].min(), df_delhi['price'].max()*1)
@@ -81,8 +89,9 @@ def price_latitude_longitude(df_delhi): #Preço em relação à Localização Ge
     plt.grid(True)
     plt.show()
 
+#Preço em relação a Quartos e Casas de Banho
 
-def price_bedrooms_bathrooms(df_delhi): #Preço em relação a Quartos e Casas de Banho
+def price_bedrooms_bathrooms(df_delhi):
     plt.figure(figsize=(10, 6))
     plt.scatter(df_delhi['bedrooms'], df_delhi['bathrooms'], c=df_delhi['price'], cmap='viridis', s=50, alpha=0.5)
     plt.clim(df_delhi['price'].min(), df_delhi['price'].max() * 1)
@@ -94,7 +103,9 @@ def price_bedrooms_bathrooms(df_delhi): #Preço em relação a Quartos e Casas d
     plt.show()
 # Perceber a distribuição (Gaussiana?)
 
-def price_car_garage(df_delhi): #Preço Médio por Número de Vagas na Garagem
+#Preço Médio por Número de Vagas na Garagem
+
+def price_car_garage(df_delhi):
     plt.figure(figsize=(10, 6))
     plt.scatter(df_delhi['car_garage'], df_delhi['price'], color='blue', alpha=0.5)
     plt.title('Preço em relação a Número de Vagas de Garagem')
@@ -103,8 +114,9 @@ def price_car_garage(df_delhi): #Preço Médio por Número de Vagas na Garagem
     plt.grid(True)
     plt.show()
 
+#Localização por Tipo de Construção
 
-def type_of_building_latitude_longitude(df_delhi): #Localização por Tipo de Construção
+def type_of_building_latitude_longitude(df_delhi):
     plt.figure(figsize=(10, 6))
     colors = {'Flat': 'blue', 'Individual House': 'green'}
     for building_type, color in colors.items():
@@ -117,8 +129,9 @@ def type_of_building_latitude_longitude(df_delhi): #Localização por Tipo de Co
     plt.grid(True)
     plt.show()
 
+#Preço por metro quadrado em relação à Localização Geográfica
 
-def price_sqft_latitude_longitude(df_delhi): #Preço por metro quadrado em relação à Localização Geográfica
+def price_sqft_latitude_longitude(df_delhi):
     plt.figure(figsize=(10, 6))
     sns.scatterplot(x='longitude', y='latitude', hue='price_sqft', palette='viridis', data=df_delhi)
     plt.title('Preço por metro quadrado em relação à Localização Geográfica')
@@ -127,6 +140,8 @@ def price_sqft_latitude_longitude(df_delhi): #Preço por metro quadrado em rela�
     scatter = plt.scatter([], [], c=[], cmap='viridis')
     plt.grid(True)
     plt.show()
+
+# Correlação de Pearson entre preço e metros quadrados
 
 def pearson_correlation_price_sqft(df_delhi):
     corr, _ = pearsonr(df_delhi['sqft_living'], df_delhi['price'])
@@ -146,10 +161,13 @@ def freq_table(df_delhi):
     })
     tabela_frequencia = tabela_frequencia.fillna(0)
     print(tabela_frequencia)
-    print("__________________________________________________________\n")
 
 #Funções de Análise, Para serem executadas é retirar o "#" da frente de cada função
 
+# avg_median_price(df_delhi)
+# avg_median_bedrooms(df_delhi)
+# avg_median_bathrooms(df_delhi)
+# avg_median_garage(df_delhi)
 # price_sqft_living(df_delhi)
 # price_type_of_building(df_delhi)
 # price_balcony(df_delhi)

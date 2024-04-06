@@ -20,26 +20,31 @@ data_total= "datasetfiles\concatenated_housing.csv"
 df_analise = pd.read_csv(data_total)
 
 # mediana dos metros quarados disponiveis
+
 def median_sqft(df_analise):
     median_sqft = df_analise['sqft_living'].median()
     print("Mediana de metros quadrados disponíveis: ", median_sqft)
 
 # mediana dos preços
+
 def median_price(df_analise):
     median_price = df_analise['price'].median()
     print("Mediana dos preços: ", median_price)
 
 #média dos preços
+
 def mean_price(df_analise):
     mean_price = df_analise['price'].mean()
     print("Média dos preços: ", mean_price)
 
 #média dos quartos disponíveis arredondada
+
 def mean_bedrooms(df_analise):
     mean_bedrooms = round(df_analise['bedrooms'].mean())
     print("Média dos quartos disponíveis: ", mean_bedrooms)
 
 #gráfico três dimensões latitude, longitude e preço
+
 def price_latitude_longitude(df_analise):
 
     plt.figure(figsize=(10, 6))
@@ -55,16 +60,14 @@ def price_latitude_longitude(df_analise):
     plt.show()
 
 #tabela com o ano de construção e o número de casas construídas nesse ano
+
 def year_built(df_analise):
     df_year_built = df_analise.groupby('year_built').size().reset_index(name='Number of houses')
     pd.set_option('display.max_rows', None)
     print(df_year_built)
 
-
-#year_built(df_analise)
-
-
 # gráfico que relaciona ano de construção da casa com número de quartos e casas de banho
+
 def yrbuilt_bathrooms_bedrooms(df_analise):
     x = df_analise['bathrooms']
     y = df_analise['bedrooms']
@@ -85,6 +88,7 @@ def yrbuilt_bathrooms_bedrooms(df_analise):
     plt.show()
 
 #Tabela com a latitude, longitude e metros quadrados de cada casa
+
 def sqft_latitude_longitude(df_analise):
 
     grouped = df_analise.groupby('latitude')
@@ -106,6 +110,7 @@ def type_house_delhi(df_analise):
     print(df_type_house)
 
 # tabela de frequência do tipo de casa em Melbourne
+
 def type_house_melbourne(df_analise):
     df_analise['type'] = df_analise['type'].str.replace(' ', '')
     df_type_house = df_analise['type'].value_counts().reset_index(name='Número de casas')
@@ -113,12 +118,14 @@ def type_house_melbourne(df_analise):
     print(df_type_house)
 
 # skewness do preço
+
 def skewness_price(df_analise):
     skewness = skew(df_analise['price'])
     print("Skewness: ", skewness)
 
 
 #correlação de spearman sobre o preço e os metros quadrados
+
 def spearman_correlation_price_sqft(df_analise):
     df_cleaned = df_analise.dropna(subset=['sqft_living', 'price'])
     spearman_corr, p_value = spearmanr(df_cleaned['price'], df_cleaned['sqft_living'])
@@ -128,12 +135,14 @@ def spearman_correlation_price_sqft(df_analise):
 
 
 #correlação de pearson sobre o preço e os metros quadrados
+
 def pearson_correlation_price_sqft(df_analise):
     df_cleaned= df_analise.dropna(subset=['sqft_living','price'])
     corr, _ = pearsonr(df_cleaned['price'], df_cleaned['sqft_living'])
     print('Correlação de Pearson para preço e metros quadrados: %.3f' % corr)
 
 # correlação de spearman entre casas de banho e quartos
+
 def spearman_correlation_bathroom_bedroom(df_analise):
     df_cleaned = df_analise.dropna(subset=['bathrooms', 'bedrooms'])
     spearman_corr, p_value = spearmanr(df_cleaned['bathrooms'], df_cleaned['bedrooms'])
@@ -141,15 +150,15 @@ def spearman_correlation_bathroom_bedroom(df_analise):
     print("Spearman correlation coefficient:", spearman_corr)
     print("p-value:", p_value)
 
-
 #correlação de pearson entre casas de banho e quartos
+
 def pearson_correlation_bathroom_bedroom(df_analise):
     df_cleaned = df_analise.dropna(subset=['bathrooms', 'bedrooms'])
     corr, _ = pearsonr(df_cleaned['bathrooms'],df_cleaned['bedrooms'])
     print('Correlação de Pearson para casas de banho e quartos: %.3f' % corr)
 
-
 #correlação de spearman entre ano de construção e preço
+
 def spearman_correlation_yrbuilt_price(df_analise):
     df_cleaned = df_analise.dropna(subset=['year_built', 'price'])
     spearman_corr, p_value = spearmanr(df_cleaned['year_built'], df_cleaned['price'])
@@ -157,14 +166,15 @@ def spearman_correlation_yrbuilt_price(df_analise):
     print("Spearman correlation coefficient:", spearman_corr)
     print("p-value:", p_value)
 
-
 #correlação de pearson entre ano de construção e preço
+
 def pearson_correlation_yrbuilt_price(df_analise):
     df_cleaned = df_analise.dropna(subset=['year_built', 'price'])
     corr, _ = pearsonr(df_cleaned['year_built'], df_cleaned['price'])
     print('Correlação de Pearson para ano de construção e preço: %.3f' % corr)
 
 #quartis do preço
+
 def quantile_price(df_analise):
     q1 = np.quantile(df_analise['price'], 0.25)
     q2 = np.quantile(df_analise['price'], 0.50)
@@ -176,6 +186,7 @@ def quantile_price(df_analise):
     print("Terceiro Quartil:", q3)
 
 #quartis dos quartos
+
 def quantile_bedrooms(df_analise):
     df_cleaned = df_analise.dropna(subset=['bedrooms'])
     q1 = np.quantile(df_cleaned['bedrooms'], 0.25)
@@ -188,6 +199,7 @@ def quantile_bedrooms(df_analise):
     print("Terceiro Quartil:", q3)
 
 #kurtosis do preço
+
 def plot_price_kurtosis(df_analise):
     price_data = df_analise['price']
     kurt = price_data.kurtosis()
@@ -208,6 +220,8 @@ def plot_price_kurtosis(df_analise):
     plt.grid(True)
     plt.show()
 
+#histograma do número de quartos e preço para quartos inferiores a 6
+
 def number_bedrooms_price_under_six(df_analise):
     df = df_analise[df_analise["bedrooms"] < 6]
     g = sns.FacetGrid(df, col="bedrooms", col_wrap=4)
@@ -217,27 +231,28 @@ def number_bedrooms_price_under_six(df_analise):
 
 
 
-mean_price(df_analise)
-median_price(df_analise)
-median_sqft(df_analise)
-mean_bedrooms(df_analise)
-price_latitude_longitude(df_analise)
-year_built(df_analise)
-yrbuilt_bathrooms_bedrooms(df_analise)
-sqft_latitude_longitude(df_analise)
-type_house_delhi(df_analise)
-type_house_melbourne(df_analise)
-skewness_price(df_analise)
-spearman_correlation_price_sqft(df_analise)
-pearson_correlation_price_sqft(df_analise)
-spearman_correlation_bathroom_bedroom(df_analise)
-pearson_correlation_bathroom_bedroom(df_analise)
-spearman_correlation_yrbuilt_price(df_analise)
-pearson_correlation_yrbuilt_price(df_analise)
-quantile_price(df_analise)
-quantile_bedrooms(df_analise)
-plot_price_kurtosis(df_analise)
-number_bedrooms_price_under_six(df_analise)
+# mean_price(df_analise)
+# median_price(df_analise)
+# median_sqft(df_analise)
+# mean_bedrooms(df_analise)
+# price_latitude_longitude(df_analise)
+# year_built(df_analise)
+# yrbuilt_bathrooms_bedrooms(df_analise)
+# sqft_latitude_longitude(df_analise)
+# type_house_delhi(df_analise)
+# type_house_melbourne(df_analise)
+# skewness_price(df_analise)
+# spearman_correlation_price_sqft(df_analise)
+# pearson_correlation_price_sqft(df_analise)
+# spearman_correlation_bathroom_bedroom(df_analise)
+# pearson_correlation_bathroom_bedroom(df_analise)
+# spearman_correlation_yrbuilt_price(df_analise)
+# pearson_correlation_yrbuilt_price(df_analise)
+# quantile_price(df_analise)
+# quantile_bedrooms(df_analise)
+# plot_price_kurtosis(df_analise)
+# number_bedrooms_price_under_six(df_analise)
 
 #para determinados metros quadrados, tentar relacionar preço máximo e mínimo e perceber a inexistência de correlação
+#EXPLICADO, O DOCUMENTO NÃO ESTAVA BEM CONCATENADO
 
