@@ -165,10 +165,23 @@ def freq_table(df_delhi):
     print(tabela_frequencia)
 
 def map_plot_price(df_delhi):
-    fig = px.scatter_mapbox(df_delhi, lat="latitude", lon="longitude", color="price",
-                            center=dict(lat=28.70, lon=77.10), zoom=8,
+    fig = px.scatter_mapbox(df_delhi,
+                            lat="latitude",
+                            lon="longitude",
+                            color="price",
+                            center=dict(lat=28.70, lon=77.10),
+                            zoom=8,
                             color_continuous_scale=px.colors.cyclical.IceFire,
-                            range_color=[df_delhi['price'].min(), df_delhi['price'].max()])  #coordenadas centrais de Delhi
+                            range_color=(df_delhi['price'].min(), df_delhi['price'].max()),
+                            custom_data=[df_delhi['bathrooms'], df_delhi['bedrooms'], df_delhi['sqft_living'], df_delhi['price']])
+
+    fig.update_traces(hovertemplate="<b>Latitude:</b> %{lat}<br>" +
+                                    "<b>Longitude:</b> %{lon}<br>" +
+                                    "<b>Preço:</b> %{marker.color} €<br>" +
+                                    "<b>Casas de Banho:</b> %{customdata[0]}<br>" +
+                                    "<b>Quartos:</b> %{customdata[1]}<br>" +
+                                    "<b>Metros Quadrados:</b> %{customdata[2]} m²<extra></extra>")
+
     fig.update_layout(mapbox_style="open-street-map")
     fig.show()
 
@@ -176,18 +189,18 @@ def map_plot_price(df_delhi):
 
 # Execução das funções
 
-# avg_median_price(df_delhi)
-# avg_median_bedrooms(df_delhi)
-# avg_median_bathrooms(df_delhi)
-# avg_median_garage(df_delhi)
-# price_sqft_living(df_delhi)
-# price_type_of_building(df_delhi)
-# price_balcony(df_delhi)
-# price_latitude_longitude(df_delhi)
-# price_bedrooms_bathrooms(df_delhi)
-# price_car_garage(df_delhi)
-# type_of_building_latitude_longitude(df_delhi)
-# price_sqft_latitude_longitude(df_delhi)
-# pearson_correlation_price_sqft(df_delhi)
-# freq_table(df_delhi)
-# map_plot_price(df_delhi)
+#avg_median_price(df_delhi)
+#avg_median_bedrooms(df_delhi)
+#avg_median_bathrooms(df_delhi)
+#avg_median_garage(df_delhi)
+#price_sqft_living(df_delhi)
+#price_type_of_building(df_delhi)
+#price_balcony(df_delhi)
+#price_latitude_longitude(df_delhi)
+#price_bedrooms_bathrooms(df_delhi)
+#price_car_garage(df_delhi)
+#type_of_building_latitude_longitude(df_delhi)
+#price_sqft_latitude_longitude(df_delhi)
+#pearson_correlation_price_sqft(df_delhi)
+#freq_table(df_delhi)
+#map_plot_price(df_delhi)

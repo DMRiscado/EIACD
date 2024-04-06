@@ -35,21 +35,6 @@ def year_built(df_australia):
     print(df_year_built)
 
 def map_plot_price(df_australia):
-        fig = px.scatter_mapbox(df_australia, lat="latitude", lon="longitude", color="price",
-                                center=dict(lat=-32.09, lon=133.25), zoom=4, color_continuous_scale=px.colors.cyclical.IceFire,range_color=[df_australia['price'].min(),df_australia['price'].max()]) #coordenadas úteis para a visualização mais abrangente
-
-        fig.update_layout(mapbox_style="open-street-map")
-        fig.show()
-
-
-#year_built(df_australia)
-#skewness_price(df_australia)
-#pearson_correlation_price_sqft(df_australia)
-#avg_median(df_australia)
-#map_plot_price(df_australia)
-
-
-def aap_plot_price(df_australia):
     fig = px.scatter_mapbox(df_australia,
                             lat="latitude",
                             lon="longitude",
@@ -63,8 +48,8 @@ def aap_plot_price(df_australia):
 
     fig.update_traces(hovertemplate="<b>Latitude:</b> %{lat}<br>" +
                                     "<b>Longitude:</b> %{lon}<br>" +
-                                    "<b>Preço:</b> %{marker.color}<br>" +
-                                    "<b>Casas de Banho:</b> %{customdata[0]}<br>" +
+                                    "<b>Preço:</b> %{marker.color} €<br>" +
+                                    "<b>Casas de Banho:</b> %{customdata[0]} <br>" +
                                     "<b>Quartos:</b> %{customdata[1]}<br>" +
                                     "<b>Metros Quadrados:</b> %{customdata[2]} m²<extra></extra>")
 
@@ -72,4 +57,8 @@ def aap_plot_price(df_australia):
     fig.show()
 
 
-aap_plot_price(df_australia)
+#year_built(df_australia)
+#skewness_price(df_australia)
+#pearson_correlation_price_sqft(df_australia)
+#avg_median(df_australia)
+#map_plot_price(df_australia)
