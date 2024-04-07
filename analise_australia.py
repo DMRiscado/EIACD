@@ -9,7 +9,7 @@ df_australia = pd.read_csv(data_australia)
 
 #Média e Mediana dos preços, quartos, casas de banho e carros na garagem na Austrália
 
-def avg_median(df_australia):
+def avg_median_price(df_australia):
     media_preco = df_australia['price'].mean()
     mediana_preco = df_australia['price'].median()
     print(f"Média dos preços na Austrália: {media_preco:.2f} €")
@@ -56,9 +56,30 @@ def map_plot_price(df_australia):
     fig.update_layout(mapbox_style="open-street-map")
     fig.show()
 
+def avg_median_bedrooms(df_australia):
+    media_quartos = df_australia["bedrooms"].mean()
+    mediana_quartos = round(media_quartos)
+    print(f"Média de quartos em Delhi: {int(media_quartos)}")
+    print(f"Mediana de quartos em Delhi: {mediana_quartos}\n")
+
+def avg_median_bathrooms(df_australia):
+    media_wc = df_australia["bathrooms"].mean()
+    mediana_wc = df_australia["bathrooms"].median()
+    print(f"Média de casas de banho em Delhi: {int(media_wc)}")
+    print(f"Mediana de casas de banho em Delhi: {mediana_wc}\n")
+
+def avg_median_garage(df_australia):
+    media_carros = df_australia["car_garage"].mean()
+    mediana_carros = df_australia["car_garage"].median()
+    print(f"Média de carros na garagem em Delhi: {int(media_carros)}")
+    print(f"Mediana de carros na garagem em Delhi: {mediana_carros}\n")
+
 
 #year_built(df_australia)
 #skewness_price(df_australia)
 #pearson_correlation_price_sqft(df_australia)
-#avg_median(df_australia)
+#avg_median_price(df_australia)
 #map_plot_price(df_australia)
+#avg_median_bedrooms(df_australia)
+#avg_median_bathrooms(df_australia)
+#avg_median_garage(df_australia)
