@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 data_delhi = "datasetfiles/delhi_housing.csv"
 df_delhi = pd.read_csv(data_delhi)
 
-# substituir vazio nas colunas 'garage' e 'balcony' pela respetiva mediana
+#Substituir vazio nas colunas 'garage' e 'balcony' pela respetiva mediana
 df_delhi['car_garage'] = df_delhi['car_garage'].fillna(df_delhi['car_garage'].median())
 df_delhi['balcony'] = df_delhi['balcony'].fillna(df_delhi['balcony'].median())
 

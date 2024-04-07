@@ -155,18 +155,18 @@ def tabela_frequencia(df_perth):
 
 # Execução das funções
 
-#avg_median_price(df_perth)
-#avg_median_bedrooms(df_perth)
-#avg_median_bathrooms(df_perth)
-#avg_median_garage(df_perth)
-#price_suburb(df_perth)
-#price_bedrooms_bathrooms(df_perth)
-#price_date_sold(df_perth)
-#price_car_garage(df_perth)
-#price_zipcode(df_perth)
-#price_latitude_longitude(df_perth)
-#price_year_built(df_perth)
-#sqft_lot_sqft_living(df_perth)
-#year_built(df_perth)
+avg_median_price(df_perth)
+avg_median_bedrooms(df_perth)
+avg_median_bathrooms(df_perth)
+avg_median_garage(df_perth)
+price_suburb(df_perth)
+price_bedrooms_bathrooms(df_perth)
+price_date_sold(df_perth)
+price_car_garage(df_perth)
+price_zipcode(df_perth)
+price_latitude_longitude(df_perth)
+price_year_built(df_perth)
+sqft_lot_sqft_living(df_perth)
+year_built(df_perth)
 
 

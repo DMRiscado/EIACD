@@ -7,7 +7,7 @@ df_melbourne = pd.read_csv(data_melbourne)
 missing_values = df_melbourne.isnull().sum()
 print(missing_values)
 
-Remoção de linhas com valores nulos
+#Remoção de linhas com valores nulos
 
 def remover_linhas(df_melbourne, arquivo_csv):
     valores_falta = df_melbourne.isnull().sum(axis=1)
