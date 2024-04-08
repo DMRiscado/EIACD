@@ -25,6 +25,10 @@ colunas_em_falta = ["bedrooms", "bathrooms", "car_garage", "sqft_living", "year_
 #        median = df_melbourne[col].median()
 #        df_melbourne[col].fillna(median, inplace=True)
 
+#Cálculo da mediana para preencher valores nulos do sqft_living
+
+#median_sqft_living = df_melbourne['sqft_living'].median()
+#df_melbourne['sqft_living'] = df_melbourne['sqft_living'].replace(0, median_sqft_living)
 
 
 #Remoção de outliers usando a técnica IQR 5/95
